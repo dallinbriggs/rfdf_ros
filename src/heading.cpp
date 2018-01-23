@@ -57,7 +57,7 @@ char *use_msg =
 #include <getopt.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-//#include <ros/ros.h>
+#include <ros/ros.h>
 
 
 

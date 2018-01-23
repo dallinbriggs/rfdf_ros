@@ -25,3 +25,6 @@ src
 
 add_executable(rfdf_heading_node
     src/heading.cpp)
+
+add_executable(rfdf_node
+    src/rfdf.cpp)
