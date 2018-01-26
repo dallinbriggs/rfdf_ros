@@ -13,6 +13,7 @@ Description:
 #include <iostream>
 #include <time.h>
 #include <ros/ros.h>
+#include "geometry_msgs/Vector3Stamped.h"
 
 #include <string.h>
 #include <termios.h>
@@ -51,7 +52,11 @@ void serial_sleep(int milliseconds);
 
 // --------------------------------------------------------
 // ROS: message configuration and transmission
-
+void rfdf_callback()
+{
+    geometry_msgs::Vector3Stamped vec_pub;
+    vec_pub.header.seq = 1;
+}
 
 
 
@@ -112,6 +117,8 @@ void main_loop()
     // process input from serial data
     if (cr > 0)
       process_serial_data(buf, cr);
+
+    ros::spinOnce();
     // sleep for 10 ms
     serial_sleep(10);
   }
@@ -162,6 +169,7 @@ void test_transmit_loop()
     // transmit one message
     send_data_serial(elevation, azimuth, id);
 
+    ros::spinOnce();
     // pause for 10 ms
     serial_sleep(10);
   }
@@ -222,8 +230,12 @@ int main(int argc, char** argv)
 {
   // process input arguments
   parse_options(argc, argv);
-  ros::init(argc, argv, "rfdf");
-  ros::NodeHandle nh_;
+  ros::init(argc, argv, "rfdf_pub");
+  ros::NodeHandle nh;
+
+  ros::Publisher rfdf_pub = nh.advertise<geometry_msgs::Vector3Stamped>("rfdf", 100);
+
+//  ros::Rate loop_rate(10);
 
   if (!device_flag)
   {
