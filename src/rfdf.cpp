@@ -12,7 +12,7 @@ Description:
 
 #include <iostream>
 #include <time.h>
-// #include <ros.h>
+#include <ros/ros.h>
 
 #include <string.h>
 #include <termios.h>
@@ -222,6 +222,8 @@ int main(int argc, char** argv)
 {
   // process input arguments
   parse_options(argc, argv);
+  ros::init(argc, argv, "rfdf");
+  ros::NodeHandle nh_;
 
   if (!device_flag)
   {
