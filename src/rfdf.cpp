@@ -197,16 +197,18 @@ void rfdf::parse_options(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-    rfdf class_obj;
-    ros::init(argc, argv, "rfdf_node");
 
+    ros::init(argc, argv, "rfdf_node");
+    rfdf class_obj;
 
     // process input arguments
-    class_obj.parse_options(argc, argv);
-    class_obj.run_test_flag = 1;
+//    class_obj.parse_options(argc, argv);
+//    class_obj.run_test_flag = 1;
+    class_obj.device_flag = 1;
+    class_obj.device = "/dev/ttyUSB1";
 
 
-    if (!class_obj.device_flag && !class_obj.run_test_flag)
+    if (!class_obj.device_flag)
     {
         std::cout << "Device option required." << std::endl;
         return EXIT_FAILURE;

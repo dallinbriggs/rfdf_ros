@@ -35,7 +35,7 @@ public:
     void ros_publish(float el, float az, int id);
 
     int buf_size_ = 100;
-    char device[BUF_SIZE];
+    char* device;
     int run_test_flag = 0;
     int device_flag = 0;
     int tty_fd;
