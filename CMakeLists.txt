@@ -3,28 +3,30 @@ project(rfdf)
 
 
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  rospy
-  std_msgs
-  geometry_msgs
-)
+    roscpp
+    rospy
+    std_msgs
+    geometry_msgs
+    )
 
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES rfdf
-#  CATKIN_DEPENDS roscpp rospy std_msgs
-#  DEPENDS system_lib
-)
+    INCLUDE_DIRS include
+    #  LIBRARIES rfdf
+    CATKIN_DEPENDS roscpp rospy std_msgs
+    #  DEPENDS system_lib
+    )
 
 
 include_directories(
-include
-src
-  ${catkin_INCLUDE_DIRS}
-)
+    include
+    ${catkin_INCLUDE_DIRS}
+    )
 
-add_executable(rfdf_heading_node
-    src/heading.cpp)
+add_library(rfdf_lib
+    src/rfdf_lib/rfdf.cpp)
 
 add_executable(rfdf_node
-    src/rfdf.cpp)
+    src/rfdf_node.cpp)
+target_link_libraries(rfdf_node
+    rfdf_lib
+    ${catkin_LIBRARIES})
