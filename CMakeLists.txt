@@ -19,12 +19,9 @@ catkin_package(
 
 include_directories(
 include
-src
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(rfdf_heading_node
-    src/heading.cpp)
-
 add_executable(rfdf_node
     src/rfdf.cpp)
+target_link_libraries(rfdf_node ${catkin_LIBRARIES})
